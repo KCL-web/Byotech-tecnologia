@@ -21,7 +21,7 @@
 
     &:focus-visible {
         outline: none;
-        box-shadow: 0 0 0 2px $color-tertiary;
+        box-shadow: 0 0 0 2px $color-primary;
     }
 
     svg {
@@ -54,7 +54,7 @@
 }
 
 .variantGradient {
-    background: linear-gradient(90deg, $color-secondary, $color-tertiary);
+    background: linear-gradient(90deg, $color-secondary, $color-primary);
     color: $color-inverse;
     border-radius: $radius-lg;
 
@@ -68,13 +68,13 @@
     background: $color-background;
 
     &:hover {
-        background: $color-accent;
+        background: $foreground;
         color: $color-default;
     }
 }
 
 .variantSecondary {
-    background: $color-accent;
+    background: $foreground;
     color: $color-default;
 
     &:hover {
@@ -86,7 +86,7 @@
     background: transparent;
 
     &:hover {
-        background: $color-accent;
+        background: $foreground;
         color: $color-default;
     }
 }

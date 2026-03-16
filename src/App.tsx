@@ -1,8 +1,16 @@
-// App.css is intentionally unused; global styles are imported in main.tsx
+import CookiesBanner from './components/CookiesBanner/CookiesBanner';
+import { LanguageProvider } from './i18n/LanguageProvider';
 import AppRoutes from './routes/routes';
 
 function App() {
-    return <AppRoutes />;
+    return (
+        <>
+            <LanguageProvider>
+                <AppRoutes />
+                <CookiesBanner />
+            </LanguageProvider>
+        </>
+    );
 }
 
 export default App;

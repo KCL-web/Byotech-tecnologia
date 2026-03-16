@@ -20,7 +20,6 @@ body {
     line-height: 1.5;
 }
 
-/* Headings */
 h1,
 h2,
 h3,
@@ -42,23 +41,16 @@ h3 {
     font-size: $font-lg;
 }
 
-/* Links */
 a {
-    color: $color-primary;
+    color: $color-grafiti;
     text-decoration: none;
 }
 
-a:hover {
-    text-decoration: underline;
-}
-
-/* Buttons default */
 button {
     font-family: inherit;
     cursor: pointer;
 }
 
-/* Utility classes */
 .container {
     width: 100%;
     max-width: 1200px;

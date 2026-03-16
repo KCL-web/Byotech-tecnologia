@@ -1,20 +1,21 @@
 .wrapper {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.2rem;
 }
 
 .input {
     width: 100%;
-    padding: 1rem;
 
     border-radius: 0.5rem;
-    border: 1px solid $color-secondary;
-    background: $color-background;
+    background: $color-inverse;
 
     font-size: 0.9rem;
     color: $color-default;
 
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid hsl(214, 32%, 91%);
     transition: all 0.2s ease;
 
     &::placeholder {
@@ -23,12 +24,17 @@
 
     &:focus-visible {
         outline: none;
-        box-shadow: 0 0 0 2px $color-tertiary;
+        box-shadow: 0 0 0 2px $color-primary;
     }
 
     &:disabled {
         opacity: 0.5;
         cursor: not-allowed;
+    }
+
+    label {
+        font-size: 0.9rem;
+        font-weight: 500;
     }
 }
 
@@ -37,7 +43,7 @@
 }
 
 .error {
-    font-size: $font-md;
+    font-size: $font-xs;
     color: #ef4444;
     min-height: 1.4em;
     max-height: 1.4em;

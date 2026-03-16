@@ -1,0 +1,393 @@
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 20;
+    background: hsl(224 58% 17%);
+}
+
+.container {
+    max-width: 1200px;
+
+    margin: 0 auto;
+    padding: 0.5rem 1rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+}
+
+.login {
+    display: none;
+    background: $color-primary;
+    color: hsl(224 58% 17%);
+    padding: 6px 14px;
+    font-weight: $font-medium;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+.langButton {
+    border: 1px solid $color-inverse;
+    background: transparent;
+    color: $color-inverse;
+
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+
+    padding: 6px 6px;
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+
+    &:hover {
+        border-color: $color-primary;
+        color: $color-primary;
+    }
+}
+
+.mobileToggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    padding: 0.75rem;
+    border-radius: $radius-pill;
+    color: $muted-foreground;
+
+    display: flex;
+
+    &:hover {
+        background-color: $foreground;
+    }
+}
+
+.nav {
+    display: none;
+    align-items: center;
+}
+
+.navItem {
+    position: relative;
+    align-items: center;
+    font-weight: $font-medium;
+    font-size: $font-md;
+    color: $color-inverse;
+    border-radius: $radius-lg;
+
+    padding: 1rem;
+
+    &:hover {
+        color: $color-primary;
+    }
+}
+
+.menuButton {
+    background: none;
+    border: none;
+
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    color: $color-inverse;
+    font-weight: $font-medium;
+    font-size: $font-md;
+
+    cursor: pointer;
+
+    &:hover {
+        color: $color-primary;
+    }
+}
+
+.megaMenu {
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 900px;
+    padding: 2rem;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
+
+    background: white;
+    border-radius: 10px;
+    z-index: 10;
+    border: 2px solid $foreground;
+
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.08);
+}
+
+.column h4 {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    color: #666;
+}
+
+.subItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+
+    padding: 6px;
+
+    text-decoration: none;
+    color: $color-grafiti;
+    font-size: $font-sm;
+
+    .icon {
+        min-width: 20px;
+    }
+
+    strong {
+        color: #666;
+        font-size: 14px;
+    }
+
+    span {
+        font-size: $font-xs;
+        color: #666;
+    }
+
+    &:hover {
+        background-color: $foreground;
+        border-radius: $radius-md;
+    }
+}
+
+.subHeader {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.badge {
+    font-size: 0.7rem;
+    background: $color-secondary;
+    padding: 2px 6px;
+    border-radius: 6px;
+}
+
+.mobileMenu {
+    position: fixed;
+    top: 80px;
+    left: 0;
+
+    width: 100%;
+    height: calc(100vh - 80px);
+
+    background: white;
+    overflow: hidden;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: all 0.25s ease;
+
+    &.open {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.mobilePanel {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow-y: auto;
+
+    padding-top: 1.5rem;
+
+    background: white;
+
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.slideLeft {
+    transform: translateX(-100%);
+}
+
+.subPanel {
+    transform: translateX(100%);
+}
+
+.open .subPanel {
+    transform: translateX(0);
+}
+
+.mobileBack {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.6rem;
+
+    background: lighten($foreground, 8%);
+    padding: 1rem;
+    color: $color-default;
+    border: none;
+
+    font-size: 1rem;
+    font-weight: 500;
+
+    margin-bottom: 1rem;
+
+    cursor: pointer;
+}
+
+.closeButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    padding: 0.75rem;
+    border-radius: $radius-pill;
+
+    display: flex;
+    color: $muted-foreground;
+
+    &:hover {
+        background-color: $foreground;
+    }
+}
+
+.mobileItem {
+    display: flex;
+    flex-direction: column;
+    padding: 14px 16px;
+    font-size: $font-sm;
+
+    a {
+        text-decoration: none;
+        color: $color-grafiti;
+        font-weight: $font-medium;
+        font-size: $font-md;
+    }
+}
+
+.mobileMenuButton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: none;
+    border: none;
+
+    padding: 10px 0;
+
+    font-size: $font-md;
+    font-weight: $font-medium;
+    color: $color-grafiti;
+
+    cursor: pointer;
+}
+
+.mobileSubmenu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    h4 {
+        font-size: 0.8rem;
+        color: #666;
+    }
+
+    a {
+        text-decoration: none;
+        color: #111;
+        font-size: 0.9rem;
+    }
+}
+
+.mobileColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    h4 {
+        margin: 0;
+    }
+}
+
+.mobileSubItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    border-radius: $radius-md;
+    padding: 10px;
+
+    &:hover {
+        background-color: $foreground;
+    }
+
+    strong {
+        color: $color-grafiti;
+    }
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mobileContent {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    strong {
+        color: $color-grafiti;
+    }
+
+    span {
+        font-size: 0.85rem;
+        color: #666;
+    }
+}
+
+.rotate {
+    transform: rotate(180deg);
+}
+
+@media (min-width: 1024px) {
+    .nav {
+        display: flex;
+    }
+
+    .mobileToggle {
+        display: none;
+    }
+
+    .login {
+        display: inline-block;
+    }
+
+    .actions {
+        gap: 12px;
+    }
+}
