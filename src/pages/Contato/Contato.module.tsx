@@ -133,7 +133,7 @@ const Contato = () => {
                             >
                                 <div className={styles.row}>
                                     <Input
-                                        id="name"
+                                        name="name"
                                         label={t.contact.name}
                                         placeholder={t.contact.namePH}
                                         value={form.name}
@@ -142,7 +142,7 @@ const Contato = () => {
                                     />
 
                                     <Input
-                                        id="email"
+                                        name="email"
                                         label={t.contact.email}
                                         placeholder={t.contact.emailPH}
                                         value={form.email}
@@ -153,7 +153,7 @@ const Contato = () => {
 
                                 <div className={styles.row}>
                                     <Input
-                                        id="phone"
+                                        name="phone"
                                         label={t.contact.phone}
                                         placeholder={t.contact.phonePH}
                                         value={form.phone}
@@ -162,7 +162,7 @@ const Contato = () => {
                                     />
 
                                     <Input
-                                        id="company"
+                                        name="company"
                                         label={t.contact.company}
                                         placeholder={t.contact.companyPH}
                                         value={form.company}
@@ -173,7 +173,7 @@ const Contato = () => {
 
                                 <Textarea
                                     label={t.contact.message}
-                                    id="details"
+                                    name="details"
                                     value={form.details}
                                     onChange={handleChange}
                                 />
