@@ -8,14 +8,6 @@ import {
     Menu,
     X,
 } from 'lucide-react';
-import {
-    Server,
-    Cloud,
-    Mail,
-    ShieldCheck,
-    DatabaseBackup,
-    LifeBuoy,
-} from 'lucide-react';
 
 import Logo from '@assets/logo.webp';
 
@@ -54,66 +46,7 @@ const createNavItems = (t: TranslationKeys['nav']): NavItem[] => [
     },
     {
         label: t.services,
-        columns: [
-            {
-                title: t.infrastructure,
-                items: [
-                    {
-                        title: t.hosting,
-                        description: t.hostingDesc,
-                        href: '/hospedagem',
-                        icon: <Server size={18} />,
-                    },
-                    {
-                        title: t.vps,
-                        description: t.vpsDesc,
-                        href: '/vps',
-                        icon: <Cloud size={18} />,
-                    },
-                ],
-            },
-            {
-                title: t.communication,
-                items: [
-                    {
-                        title: t.email,
-                        description: t.emailDesc,
-                        href: '/email',
-                        icon: <Mail size={18} />,
-                    },
-                ],
-            },
-            {
-                title: t.security,
-                items: [
-                    {
-                        title: t.backup,
-                        description: t.backupDesc,
-                        href: '/backup',
-                        badge: 'Essencial',
-                        icon: <DatabaseBackup size={18} />,
-                    },
-                    {
-                        title: t.audit,
-                        description: t.auditDesc,
-                        href: '/auditoria',
-                        icon: <ShieldCheck size={18} />,
-                    },
-                ],
-            },
-            {
-                title: t.management,
-                items: [
-                    {
-                        title: t.support,
-                        description: t.supportDesc,
-                        href: '/suporte-ti',
-                        badge: '24/7',
-                        icon: <LifeBuoy size={18} />,
-                    },
-                ],
-            },
-        ],
+        href: '/servicos',
     },
     {
         label: t.help,

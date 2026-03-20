@@ -1,0 +1,86 @@
+.os-selector {
+    background: white;
+    border: 1px solid $foreground;
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: border-color 0.2s;
+    box-shadow: $shadow-sm;
+
+    &:hover {
+        border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    &__title {
+        font-family: $font-sans;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: $color-default;
+        margin-bottom: 1.1rem;
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+
+        @media (max-width: 480px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: $color-inverse;
+        border: 1px solid $foreground;
+        border-radius: 10px;
+        padding: 1rem;
+        cursor: pointer;
+        font-family: $font-sans;
+        color: $color-default;
+        text-align: left;
+        transition:
+            border-color 0.15s ease,
+            background 0.15s ease;
+
+        &:hover:not(&--active) {
+            border-color: $color-primary;
+        }
+
+        &:focus-visible {
+            outline: 2px solid $color-primary;
+            outline-offset: 2px;
+        }
+
+        &--active {
+            border-color: $color-primary;
+            background: rgba(250, 249, 249, 0.815);
+        }
+    }
+
+    &__item-icon {
+        max-width: 40px;
+        flex-shrink: 0;
+    }
+
+    &__item-body {
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
+    }
+
+    &__item-label {
+        font-size: 0.88rem;
+        font-weight: 700;
+    }
+
+    &__item-sub {
+        font-size: 0.7rem;
+        color: $color-muted;
+        font-family: $font-mono;
+        line-height: 1.4;
+    }
+}

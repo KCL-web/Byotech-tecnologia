@@ -1,0 +1,286 @@
+$border: rgba(255, 255, 255, 0.07);
+$accent: #1ef090;
+$accent-dim: rgba(30, 240, 144, 0.12);
+$accent-glow: rgba(30, 240, 144, 0.25);
+$text: #e8eaed;
+$text-muted: #6b7280;
+$text-dim: #9ca3af;
+
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.4;
+        transform: scale(0.8);
+    }
+}
+
+.summary {
+    background: white;
+    border: 1px solid $foreground;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow:
+        0 0 0 1px rgba(30, 240, 144, 0.04),
+        0 24px 48px rgba(0, 0, 0, 0.4);
+
+    &__bar {
+        height: 3px;
+        background: linear-gradient(90deg, $color-primary, $color-secondary);
+    }
+
+    &__header {
+        padding: 1rem 1.25rem 0.9rem;
+        border-bottom: 1px solid $foreground;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__header-left {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+    }
+
+    &__header-icon {
+        width: 28px;
+        height: 28px;
+        background: $color-secondary;
+        border: 1px solid $color-primary;
+        border-radius: 7px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.85rem;
+        flex-shrink: 0;
+    }
+
+    &__header-title {
+        font-family: $font-sans;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: $color-default;
+    }
+
+    &__header-subtitle {
+        font-size: 0.65rem;
+        color: $color-muted;
+        font-family: $font-mono;
+        margin-top: 0.1rem;
+    }
+
+    &__status {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 0.65rem;
+        font-family: $font-mono;
+        color: $color-primary;
+        background: #ffaa0018;
+        border: 1px solid $color-primary;
+        padding: 0.25rem 0.6rem;
+        border-radius: 100px;
+    }
+
+    &__status-dot {
+        display: block;
+        width: 5px;
+        height: 5px;
+        background: $color-primary;
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+    }
+
+    &__specs {
+        list-style: none;
+        padding: 1rem 1.25rem;
+        border-bottom: 1px solid $foreground;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    &__row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.55rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        gap: 0.5rem;
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    &__row-left {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        min-width: 0;
+    }
+
+    &__row-icon {
+        width: 22px;
+        height: 22px;
+        background: white;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7rem;
+        flex-shrink: 0;
+    }
+
+    &__row-label {
+        font-size: 0.7rem;
+        color: $color-muted;
+        font-family: $font-mono;
+        white-space: nowrap;
+    }
+
+    &__row-value {
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: $color-grafiti;
+        text-align: right;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 160px;
+        transition: color 0.2s;
+    }
+
+    &__pricing {
+        padding: 1.1rem 1.25rem;
+        background: #fdc0451e;
+        border-bottom: 1px solid $foreground;
+    }
+
+    &__pricing-main {
+        text-align: center;
+        padding-bottom: 0.25rem;
+    }
+
+    &__pricing-headline {
+        display: block;
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: $color-primary;
+        letter-spacing: -0.02em;
+        font-family: $font-sans;
+    }
+
+    &__pricing-sub {
+        font-size: 0.72rem;
+        color: $color-muted;
+        font-family: $font-mono;
+        margin-top: 0.35rem;
+        line-height: 1.5;
+    }
+
+    &__pricing-divider {
+        height: 1px;
+        background: $foreground;
+        margin: 0.85rem 0 0.75rem;
+    }
+
+    &__pricing-note {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding: 0.6rem 0.75rem;
+        background: white;
+        border: 1px solid $color-primary;
+        border-radius: 8px;
+    }
+
+    &__pricing-note-icon {
+        font-size: 1rem;
+        flex-shrink: 0;
+        margin-top: 0.1rem;
+    }
+
+    &__pricing-note-text {
+        font-size: 0.72rem;
+        color: $color-grafiti;
+        font-family: $font-mono;
+        line-height: 1.5;
+
+        strong {
+            color: $color-default;
+            font-weight: 500;
+        }
+
+        &--accent {
+            color: $color-primary !important;
+        }
+    }
+
+    &__cta {
+        padding: 1.1rem 1.25rem;
+    }
+
+    &__cta-button {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        background: $color-primary;
+        color: #000;
+        border: none;
+        padding: 0.85rem 1rem;
+        border-radius: 9px;
+        font-family: $font-sans;
+        font-weight: 700;
+        font-size: 0.88rem;
+        cursor: pointer;
+        letter-spacing: 0.01em;
+        transition:
+            background 0.2s,
+            transform 0.2s,
+            box-shadow 0.2s;
+
+        &:hover {
+            background: $color-secondary;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 28px $color-primary;
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
+
+        &:focus-visible {
+            outline: 2px solid $color-primary;
+            outline-offset: 3px;
+        }
+    }
+
+    &__cta-trust {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 0.85rem;
+    }
+
+    &__cta-trust-item {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-size: 0.65rem;
+        color: $color-muted;
+        font-family: $font-mono;
+
+        svg {
+            color: $color-primary;
+        }
+    }
+}

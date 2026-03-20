@@ -1,20 +1,19 @@
-import {
-    Shield,
-    Zap,
-    Clock,
-    Users,
-    Server,
-    Monitor,
-    CheckCircle2,
-} from 'lucide-react';
+import { Shield, Zap, Clock, Users, ExternalLink, Check } from 'lucide-react';
 
 import { motion, type Variants } from 'framer-motion';
 
 import aboutHero from '@/assets/about-hero.jpg';
 import serversImg from '@/assets/servers-closeup.jpg';
 
+import virtualVisions from '@assets/virtualvisions.webp';
+import pixelWeb from '@assets/pixelweb.webp';
+
+import infraLinux from '@/assets/infra-linux.png';
+import infraWindows from '@/assets/infra-windows.png';
+import infraSecurity from '@/assets/infra-security.png';
+
 import styles from './Sobre.module.scss';
-import Counter from '@/components/Counter';
+import PlansSlider from '@/components/PlansSlider/PlansSlider';
 
 const fadeUp: Variants = {
     hidden: { opacity: 0, y: 40 },
@@ -57,38 +56,71 @@ const values = [
     },
 ];
 
-const metrics = [
-    { value: 15, suffix: '+', label: 'Anos de Experiência' },
-    { value: 500, suffix: '+', label: 'Clientes Atendidos' },
-    { value: 1000, suffix: '+', label: 'Servidores Gerenciados' },
-    { value: 99, suffix: ',98%', label: 'Uptime Garantido' },
+type Client = {
+    name: string;
+    description: string;
+    image?: string;
+    url: string;
+};
+
+const clients: Client[] = [
+    {
+        name: 'Virtual Visions',
+        url: 'https://www.virtualvisions.com.br/',
+        image: virtualVisions,
+        description:
+            'A Virtual Visions é especialista em videoconferência para organizações de todos os portes, oferecendo recomendações honestas, cumprimento de prazos, instalação inclusa e suporte garantido após a venda ou locação.',
+    },
+    {
+        name: 'PixelWeb',
+        url: 'https://www.pixelweb.dev.br/',
+        image: pixelWeb,
+        description:
+            'Soluções digitais para transformar negócios — desenvolvendo sistemas, websites e aplicativos sob medida com foco em performance, experiência do usuário e arquitetura escalável.',
+    },
 ];
 
-const infra = [
+const containerAnimation = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0 },
+};
+
+const cardAnimation = {
+    hidden: { opacity: 0, y: 14 },
+    visible: { opacity: 1, y: 0 },
+};
+
+interface InfraCard {
+    image: string;
+    title: string;
+    features: string[];
+}
+
+const infraCards: InfraCard[] = [
     {
-        icon: Server,
+        image: infraLinux,
         title: 'Servidores Linux',
-        items: [
-            'CentOS, Ubuntu, Debian',
-            'Apache & Nginx',
+        features: [
+            'CentOS, Ubuntu e Debian',
+            'Apache e Nginx',
             'Alta performance',
-            'cPanel/WHM',
+            'cPanel e WHM',
         ],
     },
     {
-        icon: Monitor,
+        image: infraWindows,
         title: 'Servidores Windows',
-        items: [
+        features: [
             'Windows Server 2019+',
-            'IIS & SQL Server',
+            'IIS e SQL Server',
             'Active Directory',
             'Remote Desktop',
         ],
     },
     {
-        icon: Shield,
-        title: 'Segurança & Backup',
-        items: [
+        image: infraSecurity,
+        title: 'Segurança e Backup',
+        features: [
             'Firewall dedicado',
             'SSL gratuito',
             'Backup diário',
@@ -104,22 +136,25 @@ const Sobre = () => {
                 <img
                     src={aboutHero}
                     alt="Infraestrutura de cloud computing e data center"
-                    className={styles.heroBg}
+                    className={styles.hero__bg}
                 />
 
-                <div className={styles.heroOverlay} />
+                <div className={styles.hero__overlay} />
 
                 <motion.div
-                    className={styles.heroContainer}
+                    className={styles.hero__container}
                     initial="hidden"
                     animate="visible"
                     variants={stagger}
                 >
-                    <motion.h1 variants={fadeUp} className={styles.title}>
+                    <motion.h1 variants={fadeUp} className={styles.hero__title}>
                         Quem é a <span>Byotec</span>
                     </motion.h1>
 
-                    <motion.p variants={fadeUp} className={styles.subtitle}>
+                    <motion.p
+                        variants={fadeUp}
+                        className={styles.hero__subtitle}
+                    >
                         Há mais de 15 anos conectando empresas ao futuro com
                         soluções de infraestrutura de TI de alta performance.
                     </motion.p>
@@ -127,50 +162,53 @@ const Sobre = () => {
             </section>
 
             <motion.section
-                className={styles.section}
+                className={styles.about}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: '-100px' }}
+                viewport={{ once: true }}
                 variants={stagger}
             >
-                <div className={styles.container}>
-                    <div className={styles.historyGrid}>
+                <div className={styles.about__container}>
+                    <div className={styles.about__grid}>
                         <motion.div
                             variants={fadeUp}
-                            className={styles.historyText}
+                            className={styles.about__text}
                         >
-                            <span className={styles.kicker}>
+                            <span className={styles.about__kicker}>
                                 Nossa História
                             </span>
 
-                            <h2 className={styles.sectionTitle}>
+                            <h2 className={styles.about__title}>
                                 Experiência que gera confiança
                             </h2>
 
-                            <div className={styles.historyContent}>
+                            <div className={styles.about__content}>
                                 <p>
-                                    A Byotec Tecnologia nasceu da paixão por
-                                    oferecer soluções de TI que realmente fazem
-                                    diferença no dia a dia das empresas.
-                                </p>
-
-                                <p>
-                                    Nossa missão é democratizar o acesso à
-                                    tecnologia de ponta, oferecendo serviços de
-                                    alta qualidade com preços acessíveis.
-                                </p>
-
-                                <p>
-                                    Trabalhamos com servidores próprios em
-                                    datacenters de última geração garantindo
-                                    segurança e velocidade.
+                                    <p>
+                                        A Byotec Tecnologia nasceu da paixão por
+                                        oferecer soluções de TI que realmente
+                                        fazem diferença no dia a dia das
+                                        empresas. Com mais de 15 anos de atuação
+                                        no mercado, nos consolidamos como
+                                        referência em cloud hosting, e-mail
+                                        corporativo e infraestrutura
+                                        tecnológica.
+                                    </p>{' '}
+                                    <p>
+                                        Nossa missão é democratizar o acesso à
+                                        tecnologia de ponta, oferecendo serviços
+                                        de alta qualidade com preços acessíveis
+                                        e sem amarras contratuais. Acreditamos
+                                        que a tecnologia deve ser uma aliada,
+                                        não uma complicação.
+                                    </p>{' '}
                                 </p>
                             </div>
                         </motion.div>
 
                         <motion.div
                             variants={fadeUp}
-                            className={styles.historyImage}
+                            className={styles.about__image}
                         >
                             <img
                                 src={serversImg}
@@ -182,114 +220,197 @@ const Sobre = () => {
             </motion.section>
 
             <motion.section
-                className={styles.metrics}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={stagger}
+                className={styles.values}
             >
-                <motion.div className={styles.metricHeader} variants={fadeUp}>
-                    <motion.h2 className={styles.metricTitle} variants={fadeUp}>
-                        Números que{' '}
-                        <span className={styles.titleSpan}>falam por nós</span>
-                    </motion.h2>
-                </motion.div>
-                <div className={styles.container}>
-                    <div className={styles.metricsGrid}>
-                        {metrics.map((m) => (
-                            <motion.div
-                                key={m.label}
-                                variants={fadeUp}
-                                className={styles.metric}
-                            >
-                                <p className={styles.metricValue}>
-                                    <Counter
-                                        value={m.value}
-                                        suffix={m.suffix}
-                                    />
-                                </p>
+                <div className={styles.values__container}>
+                    <h2 className={styles.values__title}>
+                        A diferença está no serviço
+                    </h2>
 
-                                <p className={styles.metricLabel}>{m.label}</p>
-                            </motion.div>
+                    <div className={styles.values__grid}>
+                        {values.map((v) => {
+                            const Icon = v.icon;
+
+                            return (
+                                <div
+                                    key={v.title}
+                                    className={styles.values__card}
+                                >
+                                    <div className={styles.values__header}>
+                                        <Icon className={styles.values__icon} />
+
+                                        <h3
+                                            className={styles.values__cardTitle}
+                                        >
+                                            {v.title}
+                                        </h3>
+                                    </div>
+
+                                    <p className={styles.values__desc}>
+                                        {v.desc}
+                                    </p>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            </motion.section>
+
+            <section className={styles.infra} aria-labelledby="infra-title">
+                <div className={styles.infra__container}>
+                    <motion.header
+                        className={styles.infra__header}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={containerAnimation}
+                        transition={{ duration: 0.5 }}
+                    >
+                        <h2 id="infra-title" className={styles.infra__title}>
+                            <span>Tecnologia de ponta</span> para sua empresa
+                        </h2>
+
+                        <p className={styles.infra__description}>
+                            Nossa infraestrutura híbrida combina o melhor dos
+                            ambientes Linux e Windows para entregar desempenho,
+                            segurança e escalabilidade.
+                        </p>
+                    </motion.header>
+
+                    <div className={styles.infra__grid}>
+                        {infraCards.map((card, index) => (
+                            <motion.article
+                                key={card.title}
+                                className={styles.infra__card}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true }}
+                                variants={cardAnimation}
+                                transition={{
+                                    duration: 0.5,
+                                    delay: index * 0.1,
+                                }}
+                            >
+                                <div className={styles.card__imageWrapper}>
+                                    <img
+                                        src={card.image}
+                                        alt={`Infraestrutura de ${card.title}`}
+                                        loading="lazy"
+                                        decoding="async"
+                                        className={styles.card__image}
+                                        width={112}
+                                        height={112}
+                                    />
+                                </div>
+
+                                <h3 className={styles.card__title}>
+                                    {card.title}
+                                </h3>
+
+                                <ul className={styles.card__features}>
+                                    {card.features.map((feature) => (
+                                        <li
+                                            key={feature}
+                                            className={styles.card__feature}
+                                        >
+                                            <span className={styles.card__icon}>
+                                                <Check
+                                                    size={14}
+                                                    strokeWidth={3}
+                                                />
+                                            </span>
+                                            {feature}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </motion.article>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            <motion.section
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={stagger}
+                className={styles.clients}
+            >
+                <div className={styles.clients__container}>
+                    <header className={styles.clients__header}>
+                        <h2
+                            id="clients-title"
+                            className={styles.clients__title}
+                        >
+                            Empresas que{' '}
+                            <strong className={styles.clients__highlight}>
+                                confiam na Byotec
+                            </strong>
+                        </h2>
+
+                        <p className={styles.clients__description}>
+                            Conheça algumas empresas que escolheram a Byotec
+                            como parceira estratégica de tecnologia para
+                            impulsionar seus resultados digitais.
+                        </p>
+                    </header>
+
+                    <div className={styles.clients__grid}>
+                        {clients.map((client) => (
+                            <article
+                                key={client.name}
+                                className={styles.clients__card}
+                                itemScope
+                                itemType="https://schema.org/Organization"
+                            >
+                                <figure className={styles.clients__media}>
+                                    <img
+                                        src={client.image}
+                                        alt={`Case de sucesso da empresa ${client.name}`}
+                                        loading="lazy"
+                                        itemProp="image"
+                                    />
+
+                                    <h3
+                                        className={styles.clients__name}
+                                        itemProp="name"
+                                    >
+                                        {client.name}
+                                    </h3>
+                                    <figcaption></figcaption>
+                                </figure>
+
+                                <div className={styles.clients__content}>
+                                    <p
+                                        className={styles.clients__text}
+                                        itemProp="description"
+                                    >
+                                        {client.description}
+                                    </p>
+
+                                    <a
+                                        href={client.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={styles.clients__link}
+                                        aria-label={`Visitar site da empresa ${client.name}`}
+                                        itemProp="url"
+                                    >
+                                        Visitar site
+                                        <ExternalLink size={16} />
+                                    </a>
+                                </div>
+                            </article>
                         ))}
                     </div>
                 </div>
             </motion.section>
 
-            <motion.section
-                className={styles.section}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={stagger}
-            >
-                <div className={styles.container}>
-                    <div className={styles.valuesGrid}>
-                        {values.map((v) => {
-                            const Icon = v.icon;
-
-                            return (
-                                <motion.div
-                                    key={v.title}
-                                    variants={fadeUp}
-                                    className={styles.valueCard}
-                                >
-                                    <div className={styles.valueIcon}>
-                                        <Icon size={26} />
-                                    </div>
-
-                                    <h3 className={styles.valueTitle}>
-                                        {v.title}
-                                    </h3>
-
-                                    <p className={styles.valueDesc}>{v.desc}</p>
-                                </motion.div>
-                            );
-                        })}
-                    </div>
-                </div>
-            </motion.section>
-
-            <motion.section
-                className={styles.infrastructure}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={stagger}
-            >
-                <div className={styles.container}>
-                    <div className={styles.infraGrid}>
-                        {infra.map((item) => {
-                            const Icon = item.icon;
-
-                            return (
-                                <motion.div
-                                    key={item.title}
-                                    variants={fadeUp}
-                                    className={styles.infraCard}
-                                >
-                                    <div className={styles.infraIcon}>
-                                        <Icon size={22} />
-                                    </div>
-
-                                    <h3 className={styles.infraTitle}>
-                                        {item.title}
-                                    </h3>
-
-                                    <ul className={styles.infraList}>
-                                        {item.items.map((li) => (
-                                            <li key={li}>
-                                                <CheckCircle2 size={16} />
-                                                {li}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </motion.div>
-                            );
-                        })}
-                    </div>
-                </div>
-            </motion.section>
+            <PlansSlider />
         </main>
     );
 };

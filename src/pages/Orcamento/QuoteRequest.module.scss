@@ -1,0 +1,85 @@
+// ─── Tokens ──────────────────────────────────────────────────────────────────
+$bg: #0c0e10;
+$bg-2: #111417;
+$bg-3: #181c20;
+$border: rgba(255, 255, 255, 0.07);
+$accent: #1ef090;
+$accent-dim: rgba(30, 240, 144, 0.12);
+$accent-glow: rgba(30, 240, 144, 0.25);
+$text: #e8eaed;
+$text-muted: #6b7280;
+$text-dim: #9ca3af;
+$font-sans: 'Syne', sans-serif;
+$font-mono: 'DM Mono', monospace;
+
+.quote {
+    padding: 10rem 0;
+}
+
+.infraquote {
+    &__configurator {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem 5rem;
+        display: grid;
+        grid-template-columns: 1fr 340px;
+        gap: 2rem;
+        align-items: start;
+
+        @media (max-width: 960px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__heading {
+        font-size: $font-xl;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: $text-muted;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+
+        &::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: $border;
+        }
+    }
+
+    &__main {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    &__sidebar {
+        position: sticky;
+        top: 1.5rem;
+    }
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.4;
+        transform: scale(0.8);
+    }
+}
+
+@keyframes fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

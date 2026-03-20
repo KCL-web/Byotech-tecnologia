@@ -241,7 +241,7 @@
     align-items: center;
     gap: 0.6rem;
 
-    background: lighten($foreground, 8%);
+    background: color.adjust($foreground, $lightness: 8%);
     padding: 1rem;
     color: $color-default;
     border: none;

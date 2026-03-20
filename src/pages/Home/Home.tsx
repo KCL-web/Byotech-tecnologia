@@ -14,26 +14,15 @@ import {
 import Counter from '@/components/Counter';
 import { motion, type Variants } from 'framer-motion';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
-
-import 'swiper/css';
-import 'swiper/css/pagination';
-
 import styles from './Home.module.scss';
 
 import AboutIMG from '@assets/M7X5J7.jpg';
+import PlansSlider from '@/components/PlansSlider/PlansSlider';
 
 interface Metric {
     value: number;
     title: string;
     suffix?: string;
-    description: string;
-}
-
-interface Feature {
-    icon: React.ReactElement;
-    title: string;
     description: string;
 }
 
@@ -63,6 +52,12 @@ const metrics: Metric[] = [
         description: 'quando você precisa',
     },
 ];
+
+interface Feature {
+    icon: React.ReactElement;
+    title: string;
+    description: string;
+}
 
 const features: Feature[] = [
     {
@@ -105,70 +100,6 @@ const item: Variants = {
     show: { opacity: 1, y: 0 },
 };
 
-interface Plan {
-    name: string;
-    description: string;
-    price: string;
-    features: string[];
-    recommended?: boolean;
-}
-
-const plans: Plan[] = [
-    {
-        name: 'Basic',
-        description: 'Para pequenas empresas',
-        price: 'R$ 149',
-        recommended: true,
-        features: [
-            'Suporte até 01 servidor',
-            'Suporte até 10 computadores',
-            'HelpDesk para até 10 usuários',
-            'Hospedagem híbrida',
-            '15 contas de e-mail',
-            'Suporte até 02 impressoras',
-        ],
-    },
-    {
-        name: 'Standard',
-        description: 'Empresas em crescimento',
-        price: 'R$ 299',
-        features: [
-            'Suporte até 02 servidores',
-            'Suporte até 25 computadores',
-            'HelpDesk para até 25 usuários',
-            'Hospedagem híbrida',
-            '30 contas de e-mail',
-            'Suporte até 03 impressoras',
-        ],
-    },
-    {
-        name: 'Advanced',
-        description: 'Operações mais robustas',
-        price: 'R$ 499',
-        features: [
-            'Suporte até 05 servidores',
-            'Suporte até 50 computadores',
-            'HelpDesk para até 50 usuários',
-            'Hospedagem híbrida',
-            '60 contas de e-mail',
-            'Suporte até 05 impressoras',
-        ],
-    },
-    {
-        name: 'Enterprise',
-        description: 'Infraestrutura completa',
-        price: 'R$ 899',
-        features: [
-            'Suporte até 10 servidores',
-            'Suporte até 100 computadores',
-            'HelpDesk para até 100 usuários',
-            'Hospedagem híbrida',
-            '120 contas de e-mail',
-            'Suporte até 25 impressoras',
-        ],
-    },
-];
-
 const contactInfo = [
     {
         icon: <Mail />,
@@ -197,28 +128,34 @@ export default function Home() {
                 <section className={styles.hero}>
                     {' '}
                     //background image definido no arquivo module.scss!
-                    <div className={styles.overlay} />
-                    <div className={styles.pulseLeft} />
-                    <div className={styles.pulseRight} />
-                    <div className={styles.heroContainer}>
-                        <h1 className={styles.heroTitle}>
+                    <div className={styles.hero__overlay} />
+                    <div className={styles.hero__pulseLeft} />
+                    <div className={styles.hero__pulseRight} />
+                    <div className={styles.hero__heroContainer}>
+                        <h1 className={styles.hero__heroTitle}>
                             Cloud Hosting que <br />
                             <span>impulsiona seu negócio</span>
                         </h1>
 
-                        <p className={styles.heroSubtitle}>
+                        <p className={styles.hero__heroSubtitle}>
                             Hospedagem, e-mail corporativo, backup e domínios
                             com a confiabilidade e suporte que sua empresa
                             precisa para operar 24/7.
                         </p>
 
-                        <div className={styles.actions}>
-                            <a href="/suporte" className={styles.primaryBtn}>
+                        <div className={styles.hero__actions}>
+                            <a
+                                href="/suporte"
+                                className={styles.hero__primaryBtn}
+                            >
                                 Falar com um especialista
                                 <ArrowRight size={18} />
                             </a>
 
-                            <a href="/servicos" className={styles.secondaryBtn}>
+                            <a
+                                href="/servicos"
+                                className={styles.hero__secondaryBtn}
+                            >
                                 <Play size={16} />
                                 Ver serviços
                             </a>
@@ -227,14 +164,12 @@ export default function Home() {
                 </section>
 
                 <section className={styles.metrics}>
-                    <div className={styles.glow} />
+                    <div className={styles.metrics__glow} />
 
-                    {/* <h1>Números que <span>falam por nós</span></h1> */}
-
-                    <div className={styles.metricsContainer}>
+                    <div className={styles.metrics__container}>
                         {metrics.map((item, index) => (
-                            <div key={index} className={styles.metric}>
-                                <span className={styles.metricValue}>
+                            <div key={index} className={styles.metrics__metric}>
+                                <span className={styles.metrics__metricValue}>
                                     <Counter
                                         value={item.value}
                                         suffix={item.suffix}
@@ -242,27 +177,31 @@ export default function Home() {
                                     />
                                 </span>
 
-                                <span className={styles.metricTitle}>
+                                <span className={styles.metrics__metricTitle}>
                                     {item.title}
                                 </span>
 
-                                <span className={styles.metricDescription}>
+                                <span
+                                    className={
+                                        styles.metrics__metricDescription
+                                    }
+                                >
                                     {item.description}
                                 </span>
                             </div>
                         ))}
                     </div>
 
-                    <div className={styles.whyContainer}>
+                    <div className={styles.why__container}>
                         <motion.div
-                            className={styles.whyContent}
+                            className={styles.why__content}
                             initial="hidden"
                             whileInView="show"
                             viewport={{ once: true, margin: '-100px' }}
                             variants={container}
                         >
                             <motion.span
-                                className={styles.whyBadge}
+                                className={styles.why__badge}
                                 variants={item}
                             >
                                 POR QUE A BYOTEC?
@@ -270,23 +209,23 @@ export default function Home() {
 
                             <motion.h2
                                 id="why-heading"
-                                className={styles.whyTitle}
+                                className={styles.why__title}
                                 variants={item}
                             >
                                 Diferenciais que fazem sua empresa decolar
                             </motion.h2>
 
                             <motion.div
-                                className={styles.whyFeatures}
+                                className={styles.why__features}
                                 variants={container}
                             >
                                 {features.map((feature, index) => (
                                     <motion.div
                                         key={index}
-                                        className={styles.whyItem}
+                                        className={styles.why__item}
                                         variants={item}
                                     >
-                                        <div className={styles.iconBox}>
+                                        <div className={styles.why__iconBox}>
                                             <div>{feature.icon}</div>
                                         </div>
                                         <div>
@@ -299,7 +238,7 @@ export default function Home() {
                         </motion.div>
 
                         <motion.div
-                            className={styles.whyImage}
+                            className={styles.why__image}
                             initial={{ opacity: 0, x: 40 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
@@ -311,8 +250,8 @@ export default function Home() {
                                 loading="lazy"
                             />
 
-                            <div className={styles.infrastructureBadge}>
-                                <div className={styles.badgeIcon}>
+                            <div className={styles.why__infrastructureBadge}>
+                                <div className={styles.why__badgeIcon}>
                                     <Check />
                                 </div>
 
@@ -325,91 +264,7 @@ export default function Home() {
                     </div>
                 </section>
 
-                <section
-                    className={styles.plans}
-                    aria-labelledby="plans-heading"
-                    itemScope
-                    itemType="https://schema.org/OfferCatalog"
-                >
-                    <div className={styles.plansContent}>
-                        <header className={styles.header}>
-                            <h2 id="plans-heading">
-                                Planos de <span>Suporte e Infraestrutura</span>
-                            </h2>
-
-                            <p>
-                                Soluções completas de suporte técnico, helpdesk
-                                personalizado e hospedagem híbrida para empresas
-                                que precisam de estabilidade e escalabilidade.
-                            </p>
-                        </header>
-
-                        <Swiper
-                            modules={[Pagination]}
-                            autoplay={{
-                                delay: 4000,
-                                disableOnInteraction: false,
-                            }}
-                            loop={true}
-                            pagination={{ clickable: true }}
-                            spaceBetween={24}
-                            breakpoints={{
-                                768: {
-                                    slidesPerView: 2,
-                                },
-                                1024: {
-                                    slidesPerView: 3,
-                                },
-                                1200: {
-                                    slidesPerView: 4,
-                                },
-                            }}
-                            className={styles.slider}
-                        >
-                            {plans.map((plan, index) => (
-                                <SwiperSlide key={index}>
-                                    <article
-                                        className={`${styles.card} ${
-                                            plan.recommended
-                                                ? styles.recommended
-                                                : ''
-                                        }`}
-                                        itemScope
-                                        itemType="https://schema.org/Offer"
-                                    >
-                                        {plan.recommended && (
-                                            <span className={styles.badge}>
-                                                Recomendado
-                                            </span>
-                                        )}
-
-                                        <header className={styles.cardHeader}>
-                                            <h3 itemProp="name">{plan.name}</h3>
-                                            <p>{plan.description}</p>
-                                        </header>
-
-                                        <div className={styles.price}>
-                                            <strong itemProp="price">
-                                                {plan.price}
-                                            </strong>
-                                            <span>/mês</span>
-                                        </div>
-
-                                        <button className={styles.button}>
-                                            Escolher plano
-                                        </button>
-
-                                        <ul className={styles.features}>
-                                            {plan.features.map((feature, i) => (
-                                                <li key={i}>{feature}</li>
-                                            ))}
-                                        </ul>
-                                    </article>
-                                </SwiperSlide>
-                            ))}
-                        </Swiper>
-                    </div>
-                </section>
+                <PlansSlider />
 
                 <section
                     className={styles.contact}
@@ -417,16 +272,21 @@ export default function Home() {
                     itemScope
                     itemType="https://schema.org/Organization"
                 >
-                    <div className={styles.container}>
-                        <header className={styles.contactheader}>
-                            <span className={styles.label}>Contato</span>
+                    <div className={styles.contact__container}>
+                        <header className={styles.contact__header}>
+                            <span className={styles.contact__label}>
+                                Contato
+                            </span>
 
-                            <h2 id="contact-heading" className={styles.title}>
+                            <h2
+                                id="contact-heading"
+                                className={styles.contact__title}
+                            >
                                 Pronto para <strong>modernizar</strong> a
                                 infraestrutura da sua empresa?
                             </h2>
 
-                            <p className={styles.contactDescription}>
+                            <p className={styles.contact__description}>
                                 Fale com nossos especialistas e descubra como
                                 nossas soluções garantem segurança, desempenho e
                                 operação contínua para o seu negócio.
@@ -434,7 +294,7 @@ export default function Home() {
 
                             <a
                                 href="/suporte"
-                                className={styles.cta}
+                                className={styles.contact__cta}
                                 aria-label="Solicitar orçamento agora"
                             >
                                 Fale com um especialista
@@ -442,24 +302,26 @@ export default function Home() {
                             </a>
                         </header>
 
-                        <div className={styles.contactCards}>
+                        <div className={styles.contact__cards}>
                             {contactInfo.map((info, index) => (
                                 <article
-                                    className={styles.contactCard}
+                                    className={styles.contact__card}
                                     key={index}
                                 >
-                                    <div className={styles.icon}>
+                                    <div className={styles.contact__icon}>
                                         {info.icon}
                                     </div>
 
-                                    <span className={styles.contactCardLabel}>
+                                    <span className={styles.contact__cardLabel}>
                                         {info.title}
                                     </span>
 
                                     {info.title === 'E-mail' ? (
                                         <a
                                             href="mailto:contato@virtualvisions.com.br"
-                                            className={styles.contactCardValue}
+                                            className={
+                                                styles.contact__cardValue
+                                            }
                                             itemProp="email"
                                         >
                                             {info.description}

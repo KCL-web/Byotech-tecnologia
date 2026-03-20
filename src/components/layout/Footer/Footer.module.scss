@@ -1,137 +1,140 @@
 .footer {
     background: hsl(230 60% 10%);
-    border-top: 1px solid $border;
     z-index: 20;
-}
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 4rem 1rem;
-}
-
-.grid {
-    display: grid;
-    gap: 2.5rem;
-
-    grid-template-columns: 1fr;
-
-    @media (min-width: 768px) {
-        grid-template-columns: repeat(2, 1fr);
+    &__container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 4rem 1rem;
     }
 
-    @media (min-width: 1024px) {
-        grid-template-columns: repeat(4, 1fr);
+    &__grid {
+        display: grid;
+        gap: 2.5rem;
+        grid-template-columns: 1fr;
+
+        @media (min-width: 768px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (min-width: 1024px) {
+            grid-template-columns: repeat(4, 1fr);
+        }
     }
-}
 
-.description {
-    font-size: 0.875rem;
-    line-height: 1.6;
-    color: $muted-foreground;
-}
-
-.title {
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: $foreground;
-}
-
-.links {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-}
-
-.link {
-    font-size: 0.875rem;
-    color: $muted-foreground;
-    transition: color 0.2s ease;
-
-    &:hover {
-        color: $color-primary;
+    &__brand {
     }
-}
 
-.contact {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-.contactItem {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-
-    font-size: 0.875rem;
-    color: $muted-foreground;
-    text-decoration: none;
-
-    transition: color 0.2s;
-
-    &:hover {
-        color: $color-primary;
+    &__logo img {
+        max-width: 140px;
     }
-}
 
-.address {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.6rem;
-}
+    &__description {
+        font-size: 0.875rem;
+        line-height: 1.6;
+        color: $muted-foreground;
+        margin-top: 0.8rem;
+    }
 
-.addressContent {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
+    &__column {
+    }
 
-    font-size: 0.875rem;
-    color: $muted-foreground;
-
-    strong {
-        color: $foreground;
+    &__title {
         font-weight: 600;
-        margin-bottom: 0.2rem;
+        margin-bottom: 1rem;
+        color: $foreground;
     }
-}
 
-.email {
-    color: $muted-foreground;
-    text-decoration: none;
-    transition: color 0.2s;
+    &__links {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+    }
 
-    &:hover {
+    &__link {
+        font-size: 0.875rem;
+        color: $muted-foreground;
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: $color-primary;
+        }
+    }
+
+    &__contact {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    &__contactItem {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+
+        font-size: 0.875rem;
+        color: $muted-foreground;
+        text-decoration: none;
+
+        transition: color 0.2s;
+
+        &:hover {
+            color: $color-primary;
+        }
+    }
+
+    &__address {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.6rem;
+        text-decoration: none;
+    }
+
+    &__addressContent {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+
+        font-size: 0.875rem;
+        color: $muted-foreground;
+
+        strong {
+            color: $foreground;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+    }
+
+    &__icon {
+        width: 16px;
+        height: 16px;
         color: $color-primary;
+        flex-shrink: 0;
     }
-}
 
-.icon {
-    width: 16px;
-    height: 16px;
-    color: $color-primary;
-    flex-shrink: 0;
-}
+    &__bottom {
+        border-top: 1px solid rgba(128, 128, 128, 0.074);
+        max-width: 1200px;
+        margin: 0 auto;
+    }
 
-.bottom {
-    border-top: 1px solid $border;
-}
+    &__bottomContent {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1.5rem 1rem;
 
-.bottomContent {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1.5rem 1rem;
-    text-align: center;
-    font-size: 0.875rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 1rem;
-    color: $muted-foreground;
-}
+        text-align: center;
+        font-size: 0.875rem;
 
-@media (min-width: 768px) {
-    .bottomContent {
-        flex-direction: row;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1rem;
+
+        color: $muted-foreground;
+
+        @media (min-width: 768px) {
+            flex-direction: row;
+        }
     }
 }
