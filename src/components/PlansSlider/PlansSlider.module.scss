@@ -29,19 +29,62 @@
         }
     }
 
-    &__slider {
-        padding-bottom: 40px;
+    &__sliderWrapper {
+        overflow: hidden;
+        width: 100%;
+        cursor: grab;
 
-        :global(.swiper-slide) {
-            padding: 20px 0;
+        &:active {
+            cursor: grabbing;
+        }
+
+        user-select: none;
+    }
+
+    &__track {
+        display: flex;
+        gap: 24px;
+        transition: transform 0.4s ease;
+        will-change: transform;
+        padding: 20px 0;
+    }
+
+    &__pagination {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 24px;
+    }
+
+    &__dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        border: none;
+        background: #cbd5e1;
+        cursor: pointer;
+        padding: 0;
+        transition:
+            background 0.2s ease,
+            transform 0.2s ease;
+
+        &--active {
+            background: $color-primary;
+            transform: scale(1.3);
+        }
+
+        &:hover:not(&--active) {
+            background: #94a3b8;
         }
     }
 }
+
 .planCard {
     background: white;
     border-radius: 14px;
     padding: 28px;
     border: 1px solid #e2e8f0;
+    position: relative;
 
     display: flex;
     flex-direction: column;
@@ -56,11 +99,16 @@
     &--recommended {
         transform: scale(1.05);
         border: 2px solid #f59e0b;
+
+        &:hover {
+            transform: scale(1.05) translateY(-4px);
+        }
     }
 
     &__badge {
         position: absolute;
         right: 20px;
+        top: 20px;
         background: #f59e0b;
         color: white;
         font-size: 12px;
@@ -105,6 +153,7 @@
 
         font-weight: 600;
         cursor: pointer;
+        transition: background 0.2s ease;
 
         &:hover {
             background: #d97706;
@@ -114,6 +163,7 @@
     &__features {
         margin-top: 20px;
         list-style: none;
+        padding: 0;
 
         li {
             display: flex;

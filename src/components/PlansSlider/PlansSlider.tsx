@@ -1,10 +1,5 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
-
+import { useRef, useState, useEffect, useCallback } from 'react';
 import styles from './PlansSlider.module.scss';
-
-import 'swiper/css';
-import 'swiper/css/pagination';
 
 export interface Plan {
     name: string;
@@ -71,6 +66,75 @@ const plans: Plan[] = [
 ];
 
 export default function PlansSlider() {
+    const trackRef = useRef<HTMLDivElement>(null);
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [slidesPerView, setSlidesPerView] = useState(1);
+    const total = plans.length;
+
+    const updateSlidesPerView = useCallback(() => {
+        const w = window.innerWidth;
+        if (w >= 1200) setSlidesPerView(4);
+        else if (w >= 1024) setSlidesPerView(3);
+        else if (w >= 768) setSlidesPerView(2);
+        else setSlidesPerView(1);
+    }, []);
+
+    useEffect(() => {
+        updateSlidesPerView();
+        window.addEventListener('resize', updateSlidesPerView);
+        return () => window.removeEventListener('resize', updateSlidesPerView);
+    }, [updateSlidesPerView]);
+
+    const maxIndex = Math.max(0, total - slidesPerView);
+
+    const goTo = useCallback(
+        (index: number) => {
+            const clamped = Math.max(0, Math.min(index, maxIndex));
+            setActiveIndex(clamped);
+            if (trackRef.current) {
+                const slideWidth = trackRef.current.offsetWidth / slidesPerView;
+                trackRef.current.style.transform = `translateX(-${clamped * slideWidth}px)`;
+            }
+        },
+        [maxIndex, slidesPerView],
+    );
+
+    useEffect(() => {
+        goTo(Math.min(activeIndex, maxIndex));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [slidesPerView]);
+
+    const dots = Array.from({ length: maxIndex + 1 });
+
+    const startXRef = useRef(0);
+    const isDraggingRef = useRef(false);
+
+    const handleDragStart = (clientX: number) => {
+        startXRef.current = clientX;
+        isDraggingRef.current = true;
+    };
+
+    const handleDragEnd = (clientX: number) => {
+        if (!isDraggingRef.current) return;
+        isDraggingRef.current = false;
+
+        const diff = startXRef.current - clientX;
+        const threshold = 50; // px mínimos para considerar um swipe
+
+        if (diff > threshold) goTo(activeIndex + 1);
+        else if (diff < -threshold) goTo(activeIndex - 1);
+    };
+
+    const onMouseDown = (e: React.MouseEvent) => handleDragStart(e.clientX);
+    const onMouseUp = (e: React.MouseEvent) => handleDragEnd(e.clientX);
+    const onMouseLeave = (e: React.MouseEvent) => handleDragEnd(e.clientX);
+
+    // Touch events
+    const onTouchStart = (e: React.TouchEvent) =>
+        handleDragStart(e.touches[0].clientX);
+    const onTouchEnd = (e: React.TouchEvent) =>
+        handleDragEnd(e.changedTouches[0].clientX);
+
     return (
         <section
             className={styles.plans}
@@ -83,7 +147,6 @@ export default function PlansSlider() {
                     <h2 id="plans-heading">
                         Planos de <span>Suporte e Infraestrutura</span>
                     </h2>
-
                     <p>
                         Soluções completas de suporte técnico, helpdesk
                         personalizado e hospedagem híbrida para empresas que
@@ -91,26 +154,26 @@ export default function PlansSlider() {
                     </p>
                 </header>
 
-                <Swiper
-                    modules={[Pagination]}
-                    loop
-                    pagination={{ clickable: true }}
-                    spaceBetween={24}
-                    breakpoints={{
-                        768: { slidesPerView: 2 },
-                        1024: { slidesPerView: 3 },
-                        1200: { slidesPerView: 4 },
-                    }}
-                    className={styles.plans__slider}
+                <div
+                    className={styles.plans__sliderWrapper}
+                    onMouseDown={onMouseDown}
+                    onMouseUp={onMouseUp}
+                    onMouseLeave={onMouseLeave}
+                    onTouchStart={onTouchStart}
+                    onTouchEnd={onTouchEnd}
                 >
-                    {plans.map((plan) => (
-                        <SwiperSlide key={plan.name}>
+                    <div className={styles.plans__track} ref={trackRef}>
+                        {plans.map((plan) => (
                             <article
+                                key={plan.name}
                                 className={`${styles.planCard} ${
                                     plan.recommended
                                         ? styles['planCard--recommended']
                                         : ''
                                 }`}
+                                style={{
+                                    flex: `0 0 calc(100% / ${slidesPerView} - 24px * (${slidesPerView} - 1) / ${slidesPerView})`,
+                                }}
                                 itemScope
                                 itemType="https://schema.org/Offer"
                             >
@@ -147,9 +210,26 @@ export default function PlansSlider() {
                                     ))}
                                 </ul>
                             </article>
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
+                        ))}
+                    </div>
+                </div>
+
+                {dots.length > 1 && (
+                    <div className={styles.plans__pagination}>
+                        {dots.map((_, i) => (
+                            <button
+                                key={i}
+                                className={`${styles.plans__dot} ${
+                                    i === activeIndex
+                                        ? styles['plans__dot--active']
+                                        : ''
+                                }`}
+                                onClick={() => goTo(i)}
+                                aria-label={`Ir para slide ${i + 1}`}
+                            />
+                        ))}
+                    </div>
+                )}
             </div>
         </section>
     );
