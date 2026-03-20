@@ -4,7 +4,6 @@ import styles from './PlansSlider.module.scss';
 export interface Plan {
     name: string;
     description: string;
-    price: string;
     features: string[];
     recommended?: boolean;
 }
@@ -13,7 +12,6 @@ const plans: Plan[] = [
     {
         name: 'Basic',
         description: 'Para pequenas empresas',
-        price: 'R$ 149',
         recommended: true,
         features: [
             'Suporte até 01 servidor',
@@ -27,7 +25,6 @@ const plans: Plan[] = [
     {
         name: 'Standard',
         description: 'Empresas em crescimento',
-        price: 'R$ 299',
         features: [
             'Suporte até 02 servidores',
             'Suporte até 25 computadores',
@@ -40,7 +37,6 @@ const plans: Plan[] = [
     {
         name: 'Advanced',
         description: 'Operações mais robustas',
-        price: 'R$ 499',
         features: [
             'Suporte até 05 servidores',
             'Suporte até 50 computadores',
@@ -53,7 +49,6 @@ const plans: Plan[] = [
     {
         name: 'Enterprise',
         description: 'Infraestrutura completa',
-        price: 'R$ 899',
         features: [
             'Suporte até 10 servidores',
             'Suporte até 100 computadores',
@@ -190,9 +185,8 @@ export default function PlansSlider() {
 
                                 <div className={styles.planCard__price}>
                                     <strong itemProp="price">
-                                        {plan.price}
+                                        Valor sob consulta
                                     </strong>
-                                    <span>/mês</span>
                                 </div>
 
                                 <button
