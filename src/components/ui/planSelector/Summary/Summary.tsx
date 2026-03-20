@@ -35,9 +35,10 @@ const SUMMARY_ROWS: SummaryRow[] = [
 type SummaryProps = {
     form: FormState;
     onSubmit: () => void;
+    loading?: boolean;
 };
 
-export function Summary({ form, onSubmit }: SummaryProps) {
+export function Summary({ form, onSubmit, loading }: SummaryProps) {
     const formatValue = (key: keyof FormState): string => {
         const val = form[key];
         if (!val) return '—';
@@ -135,9 +136,16 @@ export function Summary({ form, onSubmit }: SummaryProps) {
                     type="button"
                     className={styles['summary__cta-button']}
                     onClick={onSubmit}
+                    disabled={loading}
                 >
-                    <ChevronRight />
-                    Solicitar orçamento
+                    {loading ? (
+                        'Enviando'
+                    ) : (
+                        <>
+                            <ChevronRight />
+                            Solicitar orçamento
+                        </>
+                    )}
                 </button>
                 <div className={styles['summary__cta-trust']}>
                     <span className={styles['summary__cta-trust-item']}>

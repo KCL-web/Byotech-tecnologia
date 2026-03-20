@@ -9,8 +9,6 @@ $accent-glow: rgba(30, 240, 144, 0.25);
 $text: #e8eaed;
 $text-muted: #6b7280;
 $text-dim: #9ca3af;
-$font-sans: 'Syne', sans-serif;
-$font-mono: 'DM Mono', monospace;
 
 .quote {
     padding: 10rem 0;
@@ -59,6 +57,26 @@ $font-mono: 'DM Mono', monospace;
         position: sticky;
         top: 1.5rem;
     }
+}
+
+.successMessage {
+    background: #f0fdf4;
+    border: 1px solid #86efac;
+    color: #166534;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.errorMessage {
+    background: #fef2f2;
+    border: 1px solid #fca5a5;
+    color: #991b1b;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    font-size: 14px;
 }
 
 @keyframes pulse {

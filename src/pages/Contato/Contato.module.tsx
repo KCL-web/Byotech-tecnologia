@@ -39,6 +39,8 @@ const contactInfo = [
 const Contato = () => {
     const [loading, setLoading] = useState(false);
 
+    const [submitted, setSubmitted] = useState(false);
+
     const [form, setForm] = useState<ContactForm>({
         name: '',
         email: '',
@@ -91,19 +93,21 @@ const Contato = () => {
 
         setLoading(true);
 
-        setTimeout(() => {
-            setLoading(false);
+        setTimeout(
+            () => {
+                setLoading(false);
 
-            alert('Mensagem enviada com sucesso!');
-
-            setForm({
-                name: '',
-                email: '',
-                phone: '',
-                company: '',
-                details: '',
-            });
-        }, 1500);
+                setSubmitted(true);
+                setForm({
+                    name: '',
+                    email: '',
+                    phone: '',
+                    company: '',
+                    details: '',
+                });
+            },
+            setTimeout(() => setSubmitted(false), 5000),
+        );
     };
 
     return (
@@ -113,6 +117,13 @@ const Contato = () => {
                     <h1 className={styles.title}>
                         {t.contact.title} <span>{t.contact.span}</span>
                     </h1>
+
+                    {submitted && (
+                        <div className={styles.successMessage}>
+                            ✅ Mensagem enviada com sucesso! Em breve entraremos
+                            em contato.
+                        </div>
+                    )}
 
                     <p className={styles.subtitle}>{t.contact.subtitle}</p>
                 </div>

@@ -7,6 +7,7 @@ import { Summary } from '@/components/ui/planSelector/Summary/Summary';
 import styles from './QuoteRequest.module.scss';
 import Linux from '@assets/linux.webp';
 import Windows from '@assets/windows.webp';
+import { submitQuoteRequest } from '@/services/quoteRequestService';
 
 export type FormState = {
     servidores: string;
@@ -125,6 +126,9 @@ const OS_OPTIONS: OsOption[] = [
 
 export default function QuoteRequest() {
     const [form, setForm] = useState<FormState>(INITIAL_FORM);
+    const [loading, setLoading] = useState(false);
+    const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     const handleChange = <K extends keyof FormState>(
         field: K,
@@ -133,8 +137,32 @@ export default function QuoteRequest() {
         setForm((prev) => ({ ...prev, [field]: value }));
     };
 
-    const handleSubmit = () => {
-        console.log('Orçamento solicitado:', form);
+    const handleSubmit = async () => {
+        const isEmpty = Object.entries(form).some(
+            ([key, val]) => key !== 'sistema' && !val,
+        );
+
+        if (isEmpty) {
+            setError('Por favor, preencha todas as opções antes de enviar.');
+            return;
+        }
+
+        setLoading(true);
+        setError(null);
+
+        try {
+            await submitQuoteRequest(form);
+            setSubmitted(true);
+            setForm(INITIAL_FORM);
+        } catch (err) {
+            setError(
+                err instanceof Error
+                    ? err.message
+                    : 'Erro ao enviar orçamento.',
+            );
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -170,8 +198,21 @@ export default function QuoteRequest() {
                     /> */}
                 </div>
 
+                {submitted && (
+                    <div className={styles.successMessage}>
+                        ✅ Orçamento solicitado com sucesso! Você receberá uma
+                        resposta em até 24h.
+                    </div>
+                )}
+
+                {error && <div className={styles.errorMessage}>⚠️ {error}</div>}
+
                 <div className={styles.infraquote__sidebar}>
-                    <Summary form={form} onSubmit={handleSubmit} />
+                    <Summary
+                        form={form}
+                        onSubmit={handleSubmit}
+                        loading={loading}
+                    />
                 </div>
             </div>
             ;
